@@ -32,7 +32,11 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		long dias = diferencaEmDias(dataBase, dataVencimento);
 
 		// TODO: EXPLICAR O QUE ESTE MÉTODO ESTÁ FAZENDO
-
+		/*
+		 * Chama o método diferencaEmDias para calcular a qtde de dias passados
+		 * e faz a atribuição do valor em fatorVencimento, utilizando 4 casas, as quais são completadas
+		 * com zero de acordo com o nº de dias. Ex: dias = 3 -> fatorVencimento = 0003
+		 */
 		fatorVencimento = String.format("%04d", dias);
 
 	}
@@ -87,7 +91,12 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	private String ldCampo5() {
 		// TODO: COMPLETAR
-		return "";
+		StringBuilder buffer = new StringBuilder();
+		
+		buffer.append(fatorVencimento);		//pos 6 a 9
+		buffer.append(getValorFormatado());		//pos 10 a 19
+		
+		return buffer.toString();
 	}
 
 	/**
@@ -142,6 +151,13 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected int digitoVerificadorCodigoBarras(String codigoBarras) {
 		// TODO: COMPLETAR
+		/*
+		 * Multiplicar os valores das posições, exceto da posição 5, e somar os valores.
+		 * Depois, divide-se essa soma por 11 e pega-se o resto.
+		 * Este resto é subtraído de 11 e se o resultado for: igual a 0 ou 10 ou 11->DV = 1; != de 10 e 11->DV próprio resultado
+		 * DV NUNCA SERÁ IGUAL A 0
+		 */
+		
 		return 0;
 	}
 
@@ -155,6 +171,10 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	private String ldCampo1() {
 		StringBuilder buffer = new StringBuilder();
 		// TODO: COMPLETAR
+		buffer.append(codigoBanco);		//pos 1 a 3
+		buffer.append(codigoMoeda);		//pos 4
+		//buffer.append(numeroConvenioBanco);		//pos 20 a 25
+		
 		return buffer.toString();
 
 	}
