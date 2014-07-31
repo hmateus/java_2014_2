@@ -78,9 +78,20 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 			throws ManagerException {
 
 		//TODO: INICIALIZAR DADOS
-
+		this.codigoBanco = codigoBanco;
+		this.codigoMoeda = codigoMoeda;
+		this.dataVencimento = dataVencimento;
+		this.valor = valor;
+		this.numeroConvenioBanco = numeroConvenioBanco;
+		this.complementoNumeroConvenioBancoSemDV = complementoNumeroConvenioBancoSemDV;
+		this.numeroAgenciaRelacionamento = numeroAgenciaRelacionamento;
+		this.contaCorrenteRelacionamentoSemDV = contaCorrenteRelacionamentoSemDV;
+		this.tipoCarteira = tipoCarteira;
+		this.dataBase = dataBase;
+		
+		
 		validaDados();
-
+		
 	}
 
 	@Override
@@ -99,8 +110,15 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 		init();
 
 		StringBuilder buffer = new StringBuilder();
-		buffer.append(codigoBanco);
-		buffer.append(codigoMoeda);
+		buffer.append(codigoBanco);		//pos 1 a 3
+		buffer.append(codigoMoeda);		//pos 4
+		buffer.append(fatorVencimento);		//pos 6 a 9
+		buffer.append(getValorFormatado());		//pos 10 a 19
+		buffer.append(numeroConvenioBanco);		//pos 20 a 25
+		buffer.append(complementoNumeroConvenioBancoSemDV);		//pos 26 a 30
+		buffer.append(numeroAgenciaRelacionamento);		//pos 31 a 34
+		buffer.append(contaCorrenteRelacionamentoSemDV);		//pos 35 a 42
+		buffer.append(tipoCarteira);		//pos 43 a 44
 	    
 		//TODO: COMPLETAR
 		

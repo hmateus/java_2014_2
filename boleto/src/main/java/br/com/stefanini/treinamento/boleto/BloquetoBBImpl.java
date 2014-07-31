@@ -54,6 +54,10 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	protected String getValorFormatado() {
 
 		// TODO: Explicar o que este método está fazendo
+		/*
+		 * Complementa com zeros antes do valor para completar 8 casas e tira
+		 * o ponto do decimal, transformando-o em uma String 
+		 */
 		return String.format(
 				"%010d",
 				Long.valueOf(valor.setScale(2, RoundingMode.HALF_UP).toString()
@@ -177,6 +181,11 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	protected static long diferencaEmDias(Date dataInicial, Date dataFinal) {
 
 		// TODO: Estude a Math e escreva aqui o que este método está fazendo
+		/*
+		 * Transforma-se as datas em milissigundos, faz a subtração das mesmas e, depois, 
+		 * divide-se o resultado pelo n° de milisigundos de um dia, para transformar
+		 * em qtde de dias
+		 */
 
 		return Math
 				.round((dataFinal.getTime() - dataInicial.getTime()) / 86400000D);
