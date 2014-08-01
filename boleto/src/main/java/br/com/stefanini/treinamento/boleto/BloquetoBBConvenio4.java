@@ -96,8 +96,9 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 
 	@Override
 	protected String getLDNumeroConvenio() {
-
-		return "";
+		String convenio = String.format("%04d", Long.valueOf(numeroConvenioBanco));
+		
+		return String.format("%s.%s", convenio.substring(0, 1), convenio.substring(1, 5));
 
 	}
 
@@ -108,7 +109,8 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 	protected String getCodigoBarrasSemDigito() {
 
 		init();
-
+    
+		//TODO: COMPLETAR
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
@@ -119,9 +121,6 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 		buffer.append(numeroAgenciaRelacionamento);		//pos 31 a 34
 		buffer.append(contaCorrenteRelacionamentoSemDV);		//pos 35 a 42
 		buffer.append(tipoCarteira);		//pos 43 a 44
-	    
-		//TODO: COMPLETAR
-		
 		
 		
 		return buffer.toString();
@@ -136,7 +135,16 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 		
 		//TODO: COMPLETAR
 		
-
+		buffer.append(codigoBanco);		//pos 1 a 3
+		buffer.append(codigoMoeda);		//pos 4
+		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));	//pos 5
+		buffer.append(fatorVencimento);		//pos 6 a 9
+		buffer.append(getValorFormatado());		//pos 10 a 19
+		buffer.append(numeroConvenioBanco);		//pos 20 a 25
+		buffer.append(complementoNumeroConvenioBancoSemDV);		//pos 26 a 30
+		buffer.append(numeroAgenciaRelacionamento);		//pos 31 a 34
+		buffer.append(contaCorrenteRelacionamentoSemDV);		//pos 35 a 42
+		buffer.append(tipoCarteira);		//pos 43 a 44
 		return buffer.toString();
 	}
 

@@ -128,10 +128,10 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 		// TODO: COMPLETAR
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
-		//buffer.append(getDvCodigoBarras());		//pos 5 ERRO
+		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));		//pos 5
 		buffer.append(fatorVencimento);		//pos 6 a 9
 		buffer.append(getValorFormatado());		//pos 10 a 19
-		buffer.append("000000");		//pos 20 a 25
+		buffer.append("000000");//ou String.format("%06d", 0) pros 6 zeros	//pos 20 a 25 
 		buffer.append(numeroConvenioBanco);		//pos 26 a 32
 		buffer.append(complementoNumeroConvenioBancoSemDV);		//pos 33 a 42
 		buffer.append(tipoCarteira);		//pos 43 a 44
@@ -142,7 +142,9 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 	@Override
 	protected String getLDNumeroConvenio() {
 
-		return ""; // TODO: COMPLETAR;
+		String convenio = String.format("%07d", Long.valueOf(numeroConvenioBanco));
+		
+		return String.format("%s.%s", convenio.substring(0, 1), convenio.substring(1, 5));
 
 	}
 

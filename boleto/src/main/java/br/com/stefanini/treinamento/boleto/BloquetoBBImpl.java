@@ -106,7 +106,7 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	private String ldCampo4() {
 		// TODO: COMPLETAR
-		return "";
+		return String.valueOf(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));
 	}
 
 	/**
@@ -117,7 +117,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	private String ldCampo3() {
 
 		// TODO: COMPLETAR
-		return "";
+		return String.format("%s.%s", getCodigoBarras().substring(34, 39),
+				getCodigoBarras().substring(39, 44));
 	}
 
 	/**
@@ -127,8 +128,8 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	private String ldCampo2() {
 		// TODO: COMPLETAR
-
-		return "";
+		return String.format("%s.%s", getCodigoBarras().substring(24, 29),
+				getCodigoBarras().substring(29, 34));
 	}
 
 	/**
@@ -137,10 +138,30 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 * @param campo
 	 * @return
 	 */
-	protected int digitoVerificadorPorCampo(String campo, boolean valor) {
+	protected int digitoVerificadorPorCampo(String campo) {
 		// TODO: COMPLETAR
-
-		return 0;
+		int soma = 0, j = 0;
+		int[] pesos = {2, 1};
+		int tamanho = campo.length();
+		for(int i = tamanho - 1; i >= 0; i++){
+			if(j == 2){
+				j = 0;
+			}
+			int aux = Integer.valueOf(campo.substring(i, i+1));
+			//System.out.println(aux);
+			int produto = ( aux * pesos[j] );
+			if(produto > 9){
+				produto = produto/10 + produto%10;
+			}
+			soma += produto;
+			j++;
+		}
+		j = soma - 10;
+		if(j == 10){
+			return 0;
+		}else{
+			return j;
+		}
 	}
 
 	/**
@@ -157,8 +178,25 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		 * Este resto é subtraído de 11 e se o resultado for: igual a 0 ou 10 ou 11->DV = 1; != de 10 e 11->DV próprio resultado
 		 * DV NUNCA SERÁ IGUAL A 0
 		 */
+		int soma = 0, j = 0, aux = 0;
+		int[] pesos = {2, 3, 4, 5, 6, 7, 8, 9};
+		int tamanho = codigoBarras.length();
+		for(int i = tamanho - 1; i >= 0; i++){
+			if(j == 9){
+				j = 0;
+			}
+			aux = Integer.valueOf(codigoBarras.substring(i, i+1));
+			soma += (aux * pesos[j]);
+			j++;
+		}
+		int resto = soma % 11;
 		
-		return 0;
+		j = 11 - resto;
+		if(j == 0 || j == 10 || j == 11){
+			return 1;
+		}else{
+			return j;
+		}
 	}
 
 	/**
@@ -173,7 +211,7 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 		// TODO: COMPLETAR
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
-		//buffer.append(numeroConvenioBanco);		//pos 20 a 25
+		buffer.append(numeroConvenioBanco);		//pos 20 a 24
 		
 		return buffer.toString();
 
@@ -185,7 +223,23 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 
 		StringBuilder buffer = new StringBuilder();
 		// TODO: COMPLETAR
+		buffer.append(ldCampo1());
+		buffer.append(digitoVerificadorPorCampo(ldCampo1()));
+		buffer.append(" ");
+		
+		buffer.append(ldCampo2());
+		buffer.append(digitoVerificadorPorCampo(ldCampo2()));
+		buffer.append(" ");
+		
+		buffer.append(ldCampo3());
+		buffer.append(digitoVerificadorPorCampo(ldCampo3()));
+		buffer.append(" ");
 
+		buffer.append(ldCampo4());
+		buffer.append(" ");
+		
+		buffer.append(ldCampo5());
+		
 		return buffer.toString();
 	}
 
