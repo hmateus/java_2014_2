@@ -17,7 +17,6 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 	@Override
 	protected void validaDados() throws ManagerException {
 
-		// TODO: COMPLETAR
 
 		if (codigoBanco == null || codigoBanco.length() != 3) {
 			throw new ManagerException(
@@ -80,7 +79,6 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 			String contaCorrenteRelacionamentoSemDV, String tipoCarteira)
 			throws ManagerException {
 
-		// TODO: COMPLETAR
 		this.codigoBanco = codigoBanco;
 		this.codigoMoeda = codigoMoeda;
 		this.dataVencimento = dataVencimento;
@@ -96,8 +94,6 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 
 	}
 
-	// TODO: @sandro - refatorar os métodos getCodigoBarrasSemDigito() e
-	// getCodigoBarras()
 	@Override
 	protected String getCodigoBarrasSemDigito() {
 
@@ -105,7 +101,6 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 
 		StringBuilder buffer = new StringBuilder();
 
-		// TODO: COMPLETAR
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
 		buffer.append(fatorVencimento);		//pos 6 a 9
@@ -125,13 +120,12 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 
 		StringBuilder buffer = new StringBuilder();
 
-		// TODO: COMPLETAR
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
 		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));		//pos 5
 		buffer.append(fatorVencimento);		//pos 6 a 9
-		buffer.append(getValorFormatado());		//pos 10 a 19
-		buffer.append("000000");//ou String.format("%06d", 0) pros 6 zeros	//pos 20 a 25 
+		buffer.append(getValorFormatado());	//pos 10 a 19 
+		buffer.append("000000");	//pos 20 a 25 
 		buffer.append(numeroConvenioBanco);		//pos 26 a 32
 		buffer.append(complementoNumeroConvenioBancoSemDV);		//pos 33 a 42
 		buffer.append(tipoCarteira);		//pos 43 a 44

@@ -77,7 +77,6 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 			String contaCorrenteRelacionamentoSemDV, String tipoCarteira)
 			throws ManagerException {
 
-		//TODO: INICIALIZAR DADOS
 		this.codigoBanco = codigoBanco;
 		this.codigoMoeda = codigoMoeda;
 		this.dataVencimento = dataVencimento;
@@ -102,15 +101,12 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 
 	}
 
-	// TODO: @sandro - refatorar os métodos getCodigoBarrasSemDigito() e
-	// getCodigoBarras()
 
 	@Override
 	protected String getCodigoBarrasSemDigito() {
 
 		init();
     
-		//TODO: COMPLETAR
 		StringBuilder buffer = new StringBuilder();
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
@@ -133,7 +129,6 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 
 		StringBuilder buffer = new StringBuilder();
 		
-		//TODO: COMPLETAR
 		
 		buffer.append(codigoBanco);		//pos 1 a 3
 		buffer.append(codigoMoeda);		//pos 4
@@ -145,6 +140,7 @@ public class BloquetoBBConvenio4 extends BloquetoBBImpl implements BloquetoBB {
 		buffer.append(numeroAgenciaRelacionamento);		//pos 31 a 34
 		buffer.append(contaCorrenteRelacionamentoSemDV);		//pos 35 a 42
 		buffer.append(tipoCarteira);		//pos 43 a 44
+		
 		return buffer.toString();
 	}
 

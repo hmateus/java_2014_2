@@ -12,10 +12,11 @@ import br.com.stefanini.treinamento.exception.NumeroConvenioException;
 public class Principal {
 
 	public static void main(String[] args) {
+		
 
 		String codigoBanco = "001";
 		String codigoMoeda = "9";
-
+		
 		Calendar calendarVencimento = Calendar.getInstance();
 		calendarVencimento.set(2014, 07, 30);
 		Date dataVencimento = calendarVencimento.getTime();
@@ -42,7 +43,7 @@ public class Principal {
 					+ bloqueto.getCodigoBarras());
 			System.out.println("Linha digitável do Boleto Bancário:\t"
 					+ bloqueto.getLinhaDigitavel());
-
+			
 		} catch (ManagerException e) {
 			e.printStackTrace();
 		} catch (NumeroConvenioException e) {
